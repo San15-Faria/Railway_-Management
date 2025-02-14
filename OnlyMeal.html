@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Slideshow</title>
+    <link rel="stylesheet" href="meal.css">
+</head>
+<body>
+    <style>
+        .back-button a {
+    padding: 10px 20px;
+    background-color: #dc3545; /* Red color */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+    </style>
+    <h1>Meals</h1>
+    <div class="slideshow-container">
+        <div class="slides">
+            <div class="slide">
+                <img src="chai.jpg" alt="Tea">
+                <div class="caption">Tea - Rs. 10</div>
+            </div>
+            <div class="slide">
+                <img src="samosa.jpg" alt="Samosa">
+                <div class="caption">Samosa - Rs. 50</div>
+            </div>
+            <div class="slide">
+                <img src="I.webp" alt="Idli sambhar">
+                <div class="caption">Idli sambhar - Rs. 70</div>
+            </div>
+            <div class="slide">
+                <img src="R.webp" alt="Rice Roti">
+                <div class="caption">Rice Roti - Rs. 80</div>
+            </div>
+            <div class="slide">
+                <img src="veg.webp" alt="Vegetarian Thali">
+                <div class="caption">Vegetarian Thali - Rs. 100</div>
+            </div>
+            <div class="slide">
+                <img src="nonveg.jpg" alt="Non-Vegetarian Thali">
+                <div class="caption">Non-Vegetarian Thali - Rs. 150</div>
+            </div>
+        </div>
+        <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+        <a class="next" onclick="changeSlide(1)">&#10095;</a>
+    </div>
+    <script src="meal.js"></script>
+
+    <div class="back-button">
+        <a href="home.html">Back To Home</a>
+    </div>

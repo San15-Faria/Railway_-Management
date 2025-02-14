@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Form</title>
+    <link rel="stylesheet" href="book.css">
+</head>
+<style>
+    /* Your CSS styles remain unchanged */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f8ff;
+        margin: 0;
+        padding: 20px;
+    }
+
+    .bg-img {
+        background-image: url('Vande-Bharat.webp');
+        background-size: cover;
+        margin-bottom: 20px;
+    }
+
+    h1 {
+        background-color: rgba(0, 0, 0, 0.6); 
+        color: #fff;
+        padding: 20px 40px;
+        border-radius: 8px;
+        display: inline-block;
+        margin-bottom: 30px;
+        margin-left: 500px;
+        font-size: 2.5em;
+        text-align: center;
+    }
+
+    form {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+        font-weight: bold;
+        margin-top: 10px;
+        display: block;
+    }
+
+    select, input[type="date"], input[type="reset"], input[type="submit"] {
+        width: calc(100% - 16px);
+        padding: 10px;
+        margin: 5px 0 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    input[type="reset"], input[type="submit"] {
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    input[type="reset"]:hover, input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    table {
+        width: 85%;
+        margin: 50px auto;
+        border-collapse: collapse;
+        background-color: #fff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+        padding: 12px 20px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        background-color: pink;
+        color: black;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #ddd;
+    }
+</style>
+<body>
+<div class="bg-img">
+    <h1>Train Schedule</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Train Number</th>
+                <th>Train Name</th>
+                <th>Timing</th>
+                <th>Ticket Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>101</td>
+                <td>Rajdhani Express</td>
+                <td>08:00 AM</td>
+                <td>Rs.500</td>
+            </tr>
+            <tr>
+                <td>102</td>
+                <td>Shatabdi Express</td>
+                <td>09:30 AM</td>
+                <td>Rs.300</td>
+            </tr>
+            <tr>
+                <td>103</td>
+                <td>Duronto Express</td>
+                <td>10:45 AM</td>
+                <td>Rs.400</td>
+            </tr>
+            <tr>
+                <td>104</td>
+                <td>Vande Bharat Express</td>
+                <td>12:00 PM</td>
+                <td>Rs.200</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h1>Book Your Seat!</h1>
+
+    <form action="sub.php" method="POST">
+        <!-- Train Selection -->
+        <label for="train">Select Train:</label>
+        <select id="train" name="train" required onchange="updateTicketPrice()">
+            <option value="">Select a train</option>
+            <option value="101|Rajdhani Express|500">101 - Rajdhani Express</option>
+            <option value="102|Shatabdi Express|300">102 - Shatabdi Express</option>
+            <option value="103|Duronto Express|400">103 - Duronto Express</option>
+            <option value="104|Vande Bharat Express|200">104 - Vande Bharat Express</option>
+        </select>
+
+        <br>
+
+        <!-- Ticket Price Display -->
+        <label for="ticketPrice">Ticket Price:</label>
+        <span id="ticketPrice">Rs.0</span>
+
+        <br>
+
+        <!-- From Location -->
+        <label for="from">From:</label>
+        <select id="from" name="from" required>
+            <option value="">Select a departure location</option>
+            <option value="hyderabad">Hyderabad</option>
+            <option value="Margao">Margao</option>
+            <option value="Kanyakumari">Kanyakumari</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Mumbai">Mumbai</option>
+        </select>
+
+        <br>
+
+        <!-- To Location -->
+        <label for="to">To:</label>
+        <select id="to" name="to" required>
+            <option value="">Select a destination location</option>
+            <option value="hyderabad">Hyderabad</option>
+            <option value="Margao">Margao</option>
+            <option value="Kanyakumari">Kanyakumari</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Mumbai">Mumbai</option>
+        </select>
+
+        <br>
+
+        <!-- Date of Travel -->
+        <label for="date">Date of Travel:</label>
+        <input type="date" id="date" name="date" required>
+
+        <br>
+
+        <!-- Train Class -->
+        <label for="class">Train Class:</label>
+        <select id="class" name="class" required>
+            <option value="">Select train class</option>
+            <option value="economy">Economy</option>
+            <option value="business">Business</option>
+            <option value="first">First Class</option>
+        </select>
+
+        <br>
+
+        <!-- Submit and Reset -->
+        <input type="submit" value="Submit">
+        <div class="back-button">
+            <a href="home.html">Back To Home</a>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Function to update ticket price based on selected train
+    function updateTicketPrice() {
+        var selectedTrain = document.getElementById("train").value;
+        if (selectedTrain) {
+            var trainDetails = selectedTrain.split("|");
+            var price = trainDetails[2];
+            document.getElementById("ticketPrice").textContent = "Rs." + price;
+        } else {
+            document.getElementById("ticketPrice").textContent = "Rs.0";
+        }
+    }
+
+    document.querySelector('form').addEventListener('submit', function(event) {
+        const from = document.getElementById('from');
+        const to = document.getElementById('to');
+        const date = document.getElementById('date');
+        const trainClass = document.getElementById('class');
+
+        if (from.value === '') {
+            alert('Please select a departure location.');
+            from.focus();
+            event.preventDefault();
+            return;
+        }
+
+        if (to.value === '') {
+            alert('Please select a destination location.');
+            to.focus();
+            event.preventDefault();
+            return;
+        }
+
+        if (date.value === '') {
+            alert('Please select a date of travel.');
+            date.focus();
+            event.preventDefault();
+            return;
+        }
+
+        if (trainClass.value === '') {
+            alert('Please select a train class.');
+            trainClass.focus();
+            event.preventDefault();
+            return;
+        }
+
+        alert('Form submitted successfully!');
+    });
+</script>
+
+</body>
+</html>

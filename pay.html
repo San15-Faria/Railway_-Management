@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <link rel="stylesheet" href="pay.css">
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to bottom, white, #800080);
+        margin: 0;
+        padding: 20px;
+    }
+
+    .bg-img {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        margin: 50px auto;
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: bold;
+        margin-top: 10px;
+        display: block;
+    }
+
+    input[type="text"], input[type="submit"] {
+        width: calc(100% - 16px);
+        padding: 10px;
+        margin: 5px 0 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    input[type="submit"] {
+        background-color: #d17ee2;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #761e8a;
+    }
+    .back-button a {
+    padding: 10px 20px;
+    background-color: #dc3545; /* Red color */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+</style>
+<body>
+<div class="bg-img">
+    <h1>Payment Details</h1>
+    <form id="paymentForm">
+        <!-- Card Number -->
+        <label for="cardNumber">Card Number:</label>
+        <input type="text" id="cardNumber" name="cardNumber" required placeholder="16-digit card number" maxlength="16">
+
+        <!-- Expiry Date -->
+        <label for="expiryDate">Expiry Date (MM/YY):</label>
+        <input type="text" id="expiryDate" name="expiryDate" required placeholder="MM/YY" maxlength="5">
+
+        <!-- CVV -->
+        <label for="cvv">CVV:</label>
+        <input type="text" id="cvv" name="cvv" required placeholder="CVV" maxlength="3">
+
+        <!-- Email -->
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" required placeholder="Email Address">
+         <br>
+         <div class="back-button">
+            <a href="display.php">Back</a>
+        </div><br>
+        <!-- Pay Now Button -->
+        <input type="submit" value="Pay Now">
+    </form>
+</div>
+</body>
+<script>
+    document.getElementById('paymentForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        const cardNumber = document.getElementById('cardNumber');
+        const expiryDate = document.getElementById('expiryDate');
+        const cvv = document.getElementById('cvv');
+        const email = document.getElementById('email');
+
+        // Validation logic
+        if (!/^\d{16}$/.test(cardNumber.value)) {
+            alert('Please enter a valid 16-digit card number.');
+            cardNumber.focus();
+            return;
+        }
+
+        if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiryDate.value)) {
+            alert('Please enter a valid expiry date in MM/YY format.');
+            expiryDate.focus();
+            return;
+        }
+
+        if (!/^\d{3}$/.test(cvv.value)) {
+            alert('Please enter a valid 3-digit CVV.');
+            cvv.focus();
+            return;
+        }
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+            alert('Please enter a valid email address.');
+            email.focus();
+            return;
+        }
+
+        // If all validations pass
+        alert('Payment done!');
+
+        // Redirect back to the booking form
+        window.location.href = "ticket.html";
+    });
+</script>
+
+
+</html>

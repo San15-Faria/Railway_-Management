@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="bg-img">
+        <div class="container">
+            <h1>Welcome to Royal Railways!</h1>
+            <br>
+              
+            <form id="form" onsubmit="return handleSubmit(event);">
+                <h2 style="font-size: 24px; text-align: center;">Login</h2>
+
+                <div class="input-control">
+                    <b><label for="username">Username:</label></b>
+                    <input id="username" name="username" type="text" required>
+                    <div class="error"></div>
+                </div>
+                <div class="input-control">
+                    <b><label for="email">Email:</label></b>
+                    <input id="email" name="email" type="email" required>
+                    <div class="error"></div>
+                </div>
+                <div class="input-control">
+                    <b><label for="password">Password:</label></b>
+                    <input id="password" name="password" type="password" required>
+                    <div class="error"></div>
+                </div>
+                <div class="input-control">
+                    <b><label for="password2">Password again:</label></b>
+                    <input id="password2" name="password2" type="password" required>
+                    <div class="error"></div>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+           
+
+        </div>
+    </div>
+    <script src="login.js"></script>
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault(); // Prevent the default form submission
+            // Add any validation logic here if necessary
+
+            // Redirect to home.html
+            window.location.href = 'home.html';
+        }
+    </script>
+</body>
+</html>

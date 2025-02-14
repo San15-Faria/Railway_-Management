@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="home.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <title>Railway Management</title>
+</head>
+<body>
+   
+
+    <header>
+        <nav>
+            <input type="checkbox" id="check">
+            <label for="check" class="checkbtn">
+                <i class="fas fa-bars"></i>
+            </label>
+            <label class="logo">Railway Management</label>
+            <ul>
+                <li><a class="active" href="home.html">HOME</a></li>
+                <li><a href="service.html">SERVICES</a></li>
+                <li><a href="stations.html">STATIONS</a></li>
+                <li><a href="book.html">BOOK TICKETS</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+                <li><a href="about.html">ABOUT US</a></li>
+            </ul>
+        </nav>
+        <div class="bg-img">
+            <div class="slideshow-container">
+                <div class="mySlides fade">
+                    <img src="1.jpg" style="width:100%">
+                </div>
+                <div class="mySlides fade">
+                    <img src="4.webp" style="width:100%">
+                </div>
+                <div class="mySlides fade">
+                    <img src="2.jpg" style="width:100%">
+                </div>
+                <div class="mySlides fade">
+                    <img src="3.jpg" style="width:100%">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="overview-section">
+        <h2>Overview</h2>
+        <div class="overview-container">
+            <div class="overview-image">
+                <img src="5.jpg" alt="Overview Image">
+            </div>
+        <div class="over-para">
+          <p>User Registration and Login: Managing the user information and to provide secure login
+            and authentication. <br>
+            Search and View Trains (Navigation of Trains): Search for trains by route, data, and time.
+            View the proper arrival time, departure time and stops of the train.<br>
+            Cancellation : Automated process after cancellation of the booked
+            tickets.<br>
+           Payment Integration: Only Card payment options and secure payment.
+           </p>
+        </div>
+     </div>
+    </section>
+
+    <script>
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let slides = document.getElementsByClassName("mySlides");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}    
+            slides[slideIndex - 1].style.display = "block";  
+            setTimeout(showSlides, 3000); // Change image every 3 seconds
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Slideshow</title>
+    <link rel="stylesheet" href="meal.css">
+</head>
+<body>
+    <h1>Meals</h1>
+    <div class="slideshow-container">
+        <div class="slides">
+            <div class="slide">
+                <img src="chai.jpg" alt="Tea">
+                <div class="caption">Tea - Rs. 10</div>
+            </div>
+            <div class="slide">
+                <img src="samosa.jpg" alt="Samosa">
+                <div class="caption">Samosa - Rs. 50</div>
+            </div>
+            <div class="slide">
+                <img src="I.webp" alt="Idli sambhar">
+                <div class="caption">Idli sambhar - Rs. 70</div>
+            </div>
+            <div class="slide">
+                <img src="R.webp" alt="Rice Roti">
+                <div class="caption">Rice Roti - Rs. 80</div>
+            </div>
+            <div class="slide">
+                <img src="veg.webp" alt="Vegetarian Thali">
+                <div class="caption">Vegetarian Thali - Rs. 100</div>
+            </div>
+            <div class="slide">
+                <img src="nonveg.jpg" alt="Non-Vegetarian Thali">
+                <div class="caption">Non-Vegetarian Thali - Rs. 150</div>
+            </div>
+        </div>
+        <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+        <a class="next" onclick="changeSlide(1)">&#10095;</a>
+    </div>
+    <h2>Order Your Meal!</h2>
+    <form id="orderForm" onsubmit="return submitOrder()" method="POST">
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required>
+        </div>
+
+        <div class="form-group">
+            <label for="meal">Meal Name:</label>
+            <select id="meal" name="meal" required>
+                <option value="">Select a meal</option>
+                <option value="Samosa">Samosa - Rs. 50</option>
+                <option value="Idli sambhar">Idli sambhar - Rs. 70</option>
+                <option value="Rice Roti">Rice Roti - Rs. 80</option>
+                <option value="Vegetarian Thali">Vegetarian Thali - Rs. 100</option>
+                <option value="Non-Vegetarian Thali">Non-Vegetarian Thali - Rs. 150</option>
+            </select>
+        </div>
+
+        <label for="date">Date of travel:</label>
+        <input type="date" id="date" name="date" required>
+
+    </div>
+       
+        <button type="submit" class="submit-btn">Order</button>
+    </form>
+
+    <script src="meal.js"></script>
+    <script>
+        function updateCost() {
+            const mealSelect = document.getElementById("cost");
+            const cost = mealSelect.value;
+            document.getElementById("cost").innerText = cost;
+        }
+
+        function validateForm() {
+            const username = document.getElementById("username").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+
+            // Validate username
+            if (username === "") {
+                alert("Please enter your username.");
+                return false;
+            }
+
+            // Validate phone number
+            const phoneRegex = /^[0-9]{10}$/; // Adjust as necessary for format
+            if (!phoneRegex.test(phone)) {
+                alert("Please enter a valid phone number (10 digits).");
+                return false;
+            }
+
+            return true; // Form is valid
+        }
+    </script>
+
+<h2>Your Orders</h2>
+<style>
+    #order-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#order-table th, #order-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+#order-table th {
+    background-color: #fef7fe41;
+    color: rgb(10, 10, 10);
+}
+
+#order-table tr {
+    background-color: #f9f9f9;
+}
+
+#order-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+#order-table td button {
+    background-color: #dc3545; /* Red for delete button */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#order-table td button:hover {
+    background-color: #c82333; /* Darker red on hover */
+}
+.back-button a {
+    padding: 10px 20px;
+    background-color: #dc3545; /* Red color */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+</style>
+    <table id="order-table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Phone Number</th>
+                <th>Meal</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="order-list"></tbody>
+    </table>
+
+    <div class="back-button">
+        <a href="display.php">Back To Pay</a>
+    </div>
+
+    <script src="meal.js"></script>
+    <script>
+        async function submitOrder() {
+            const username = document.getElementById('username').value;
+            const phone = document.getElementById('phone').value;
+            const meal = document.getElementById('meal').value;
+            const date = document.getElementById('date').value;
+
+            const response = await fetch('submit_order.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `username=${username}&phone=${phone}&meal=${meal}&date=${date}`
+            });
+
+            if (response.ok) {
+                alert('Order placed successfully!');
+                fetchOrders(); // Refresh the order list
+            } else {
+                alert('Error placing order.');
+            }
+
+            return false; // Prevent form submission
+        }
+
+        async function fetchOrders() {
+            const response = await fetch('fetch_orders.php');
+            const orders = await response.json();
+            const orderList = document.getElementById('order-list');
+            orderList.innerHTML = '';
+
+            orders.forEach(order => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${order.username}</td>
+                    <td>${order.phone}</td>
+                    <td>${order.meal}</td>
+                    <td>${order.order_date}</td>
+                    <td><button onclick="deleteOrder(${order.id})">Delete</button></td>
+                `;
+                orderList.appendChild(row);
+            });
+        }
+
+        function deleteOrder(id) {
+            if (confirm('Are you sure you want to delete this order?')) {
+                fetch('delete_order.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: `id=${id}`
+                }).then(() => {
+                    alert('Order deleted successfully!');
+                    fetchOrders(); // Refresh the order list
+                });
+            }
+        }
+
+        // Fetch orders when the page loads
+        window.onload = fetchOrders;
+    </script>
+</body>
+</html>
+
